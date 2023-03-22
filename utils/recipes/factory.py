@@ -1,6 +1,6 @@
 from random import randint
 
-from faker import Faker
+from faker import Faker  # type: ignore
 
 
 def rand_ratio():
