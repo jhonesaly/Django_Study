@@ -27,3 +27,6 @@ class RecipeTestBase(TestCase):
             is_published=True,
         )
         return super().setUp()
+
+    def make_category(self, name='Category'):
+        return Category.objects.create(name=name)
