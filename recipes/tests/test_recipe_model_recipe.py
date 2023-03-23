@@ -43,3 +43,10 @@ class RecipeModelTest(RecipeTestBase):
             recipe.preparation_steps_is_html,
             msg='Recipe preparation_steps_is_html is not False',
         )
+
+    def test_recipe_is_published_is_false_by_default(self):
+        recipe = self.make_recipe_no_defaults()
+        self.assertFalse(
+            recipe.is_published,
+            msg='Recipe is_published is not False',
+        )
