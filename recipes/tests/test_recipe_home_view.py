@@ -20,7 +20,7 @@ class RecipeHomeViewTest(RecipeTestBase):
     def test_recipe_home_template_shows_no_recipes_found_if_no_recipes(self):
         response = self.client.get(reverse('recipes:home'))
         self.assertIn(
-            '<h1>No recipes found here 🥲</h1>',
+            '<h1> No recipes found here </h1>',
             response.content.decode('utf-8')
         )
 
@@ -45,6 +45,6 @@ class RecipeHomeViewTest(RecipeTestBase):
 
         # Check if one recipe exists
         self.assertIn(
-            '<h1>No recipes found here 🥲</h1>',
+            '<h1> No recipes found here </h1>',
             response.content.decode('utf-8')
         )
