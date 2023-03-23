@@ -9,3 +9,9 @@ class RecipeCategoryModelTest(RecipeTestBase):
             name='Category Testing'
         )
         return super().setUp()
+
+    def test_recipe_category_model_string_representation_is_name_field(self):
+        self.assertEqual(
+            str(self.category),
+            self.category.name
+        )
