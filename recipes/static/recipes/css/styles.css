@@ -301,7 +301,10 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--color-primary);
     color: var(--color-white);
   }
-  
+
+  .pagination .page-current {
+    background: var(--color-primary-dark);
+  }
 
 /* Generics */
 
