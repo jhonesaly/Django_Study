@@ -12,3 +12,11 @@ class RegisterForm(forms.ModelForm):
             'email',
             'password',
         ]
+        # exclude = ['first_name']
+        labels = {
+            'username': 'Username',
+            'first_name': 'First name',
+            'last_name': 'Last name',
+            'email': 'E-mail',
+            'password': 'Password',
+        }
