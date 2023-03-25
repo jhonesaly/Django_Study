@@ -2,7 +2,18 @@ from django import forms
 from django.contrib.auth.models import User
 
 
+def add_placeholder(field, placeholder_val):
+    field.widget.attrs['placeholder'] = placeholder_val
+
+
 class RegisterForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        add_placeholder(self.fields['username'], 'Your username')
+        add_placeholder(self.fields['email'], 'Your e-mail')
+        add_placeholder(self.fields['first_name'], 'Ex.: John')
+        add_placeholder(self.fields['last_name'], 'Ex.: Doe')
+
     password = forms.CharField(
         required=True,
         widget=forms.PasswordInput(attrs={
