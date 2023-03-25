@@ -20,3 +20,6 @@ class RegisterForm(forms.ModelForm):
             'email': 'E-mail',
             'password': 'Password',
         }
+        help_texts = {
+            'email': 'The e-mail must be valid.',
+        }
