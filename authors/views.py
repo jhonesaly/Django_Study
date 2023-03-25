@@ -5,6 +5,8 @@ from .forms import RegisterForm
 
 
 def register_view(request):
+    request.session['number'] = request.session.get('number') or 1
+    request.session['number'] += 1
     form = RegisterForm()
     return render(request, 'authors/pages/register_view.html', {
         'form': form,
