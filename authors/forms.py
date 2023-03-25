@@ -3,6 +3,13 @@ from django.contrib.auth.models import User
 
 
 class RegisterForm(forms.ModelForm):
+    password2 = forms.CharField(
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Repeat your password'
+        })
+    )
+
     class Meta:
         model = User
         fields = [
