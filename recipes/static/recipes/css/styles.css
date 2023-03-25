@@ -413,7 +413,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 
 @media (max-width: 600px) {
-    .main-content-list {
+    .main-content-list,
+    .form-content-grid {
       grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     }
 }
