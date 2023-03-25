@@ -21,7 +21,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('recipes.urls')),  # domínio.com/
-
+    path('authors/', include('authors.urls')),
     # path('urls/', include('recipes.urls')), # domínio.com/urls
 ]
 
