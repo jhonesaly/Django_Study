@@ -23,3 +23,8 @@ class RegisterForm(forms.ModelForm):
         help_texts = {
             'email': 'The e-mail must be valid.',
         }
+        error_messages = {
+            'username': {
+                'required': 'This field must not be empty',
+            }
+        }
