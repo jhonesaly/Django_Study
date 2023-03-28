@@ -22,8 +22,9 @@ class AuthorRegisterFormUnitTest(TestCase):
 
     @parameterized.expand([
         ('username', (
-            'Obrigatório. 150 caracteres ou menos. '
-            'Letras, números e @/./+/-/_ apenas.')),
+            'Username must have letters, numbers or one of those @.+-_. '
+            'The length should be between 4 and 150 characters.'
+        )),
         ('email', 'The e-mail must be valid.'),
         ('password', (
             'Password must have at least one uppercase letter, '
