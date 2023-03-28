@@ -82,12 +82,6 @@ class RegisterForm(forms.ModelForm):
         ]
         labels = {
             'username': 'Username',
-            'first_name': 'First name',
-            'last_name': 'Last name',
-            'email': 'E-mail',
-        }
-        help_texts = {
-            'email': 'The e-mail must be valid.',
         }
         error_messages = {
             'username': {
