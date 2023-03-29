@@ -18,12 +18,15 @@ class AuthorsRegisterTest(AuthorsBaseTest):
             if field.is_displayed():
                 field.send_keys(' ' * 20)
 
-    def test_empty_first_name_error_message(self):
-        self.browser.get(self.live_server_url + '/authors/register/')
-        form = self.browser.find_element(
+    def get_form(self):
+        return self.browser.find_element(
             By.XPATH,
             '/html/body/main/div[2]/form'
         )
+
+    def test_empty_first_name_error_message(self):
+        self.browser.get(self.live_server_url + '/authors/register/')
+        form = self.get_form()
 
         self.fill_form_dummy_data(form)
         form.find_element(By.NAME, 'email').send_keys('dummy@email.com')
