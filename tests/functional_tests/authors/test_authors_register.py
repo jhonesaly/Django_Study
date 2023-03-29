@@ -24,6 +24,16 @@ class AuthorsRegisterTest(AuthorsBaseTest):
             '/html/body/main/div[2]/form'
         )
 
+    def form_field_test_with_callback(self, callback):
+        self.browser.get(self.live_server_url + '/authors/register/')
+        form = self.get_form()
+
+        self.fill_form_dummy_data(form)
+        form.find_element(By.NAME, 'email').send_keys('dummy@email.com')
+
+        callback(form)
+        return form
+
     def test_empty_first_name_error_message(self):
         self.browser.get(self.live_server_url + '/authors/register/')
         form = self.get_form()
