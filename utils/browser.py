@@ -1,4 +1,5 @@
 from pathlib import Path
+from time import sleep
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -10,3 +11,7 @@ CHROMEDRIVER_PATH = ROOT_PATH / 'bin' / CHROMEDRIVER_NAME
 chrome_options = webdriver.ChromeOptions()
 chrome_service = Service(executable_path=CHROMEDRIVER_PATH)
 browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+
+browser.get('http://www.google.com.br/')
+sleep(5)
+browser.quit()
