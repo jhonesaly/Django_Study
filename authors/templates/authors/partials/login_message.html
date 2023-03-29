@@ -1,5 +1,5 @@
-{% if request.user.is_authenticated %}
-<div>
+{% if user.is_authenticated %}
+<div class="login-message">
   Your are logged in with 
   {{ request.user.username }}. 
   Please, 
