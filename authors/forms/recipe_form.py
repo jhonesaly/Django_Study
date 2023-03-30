@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 from django import forms
 from recipes.models import Recipe
 from utils.django_forms import add_attr
@@ -6,6 +8,8 @@ from utils.django_forms import add_attr
 class AuthorRecipeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self._my_errors = defaultdict(list)
 
         add_attr(self.fields.get('preparation_steps'), 'class', 'span-2')
 
