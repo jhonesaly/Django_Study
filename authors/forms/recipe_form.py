@@ -1,6 +1,7 @@
 from collections import defaultdict
 
 from django import forms
+from django.core.exceptions import ValidationError
 from recipes.models import Recipe
 from utils.django_forms import add_attr
 
@@ -41,5 +42,16 @@ class AuthorRecipeForm(forms.ModelForm):
 
     def clean(self, *args, **kwargs):
         super_clean = super().clean(*args, **kwargs)
+        cd = self.cleaned_data
+
+        title = cd.get('title')
+        description = cd.get('description')
+
+        if title == description:
+            self._my_errors['title'].append('Cannot be equal to description')
+            self._my_errors['description'].append('Cannot be equal to title')
+
+        if self._my_errors:
+            raise ValidationError(self._my_errors)
 
         return super_clean
