@@ -4,6 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from recipes.models import Recipe
 from utils.django_forms import add_attr
+from utils.strings import is_positive_number
 
 
 class AuthorRecipeForm(forms.ModelForm):
@@ -63,3 +64,12 @@ class AuthorRecipeForm(forms.ModelForm):
             self._my_errors['title'].append('Must have at least 5 chars.')
 
         return title
+
+    def clean_preparation_time(self):
+        field_name = 'preparation_time'
+        field_value = self.cleaned_data.get(field_name)
+
+        if not is_positive_number(field_value):
+            self._my_errors[field_name].append('Must be a positive number')
+
+        return field_value
