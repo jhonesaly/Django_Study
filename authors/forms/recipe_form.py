@@ -38,3 +38,8 @@ class AuthorRecipeForm(forms.ModelForm):
                 ),
             ),
         }
+
+    def clean(self, *args, **kwargs):
+        super_clean = super().clean(*args, **kwargs)
+
+        return super_clean
