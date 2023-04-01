@@ -158,57 +158,13 @@ Use ctrl + o, enter e ctrl + x para sair e continue:
 
     sudo nano /etc/systemd/system/curso_django.service
 
-Adicione no arquivo:
+Adicione no arquivo o conteúdo do gunicorn.txt modificado:
 
+    # Conteúdo do arquivo
     [Unit]
     Description=Gunicorn daemon (You can change if you want)
-    Requires=curso_django.socket
-    After=network.target
-
-    [Service]
-    User=ubuntu
-    Group=www-data
-    Restart=on-failure
-    EnvironmentFile=/home/ubuntu/app_repo/.env
-    WorkingDirectory=/home/ubuntu/app_repo
-    # --error-logfile --enable-stdio-inheritance --log-level and --capture-output
-    # are all for debugging purposes.
-    ExecStart=/home/ubuntu/app_repo/venv/bin/gunicorn \
-            --error-logfile /home/ubuntu/app_repo/gunicorn-error-log \
-            --enable-stdio-inheritance \
-            --log-level "debug" \
-            --capture-output \
-            --access-logfile - \
-            --workers 6 \
-            --bind unix:/run/curso_django.socket \
-            project.wsgi:application
-
-    [Install]
-    WantedBy=multi-user.target
-
-Use ctrl + o, enter e ctrl + x para sair e continue:
-
-    sudo systemctl start curso_django.socket
-    sudo systemctl enable curso_django.socket
-
-    sudo systemctl status curso_django.socket
-    sudo systemctl status curso_django.service
-
-    curl --unix-socket /run/curso_django.socket localhost
-    sudo systemctl status curso_django
-
-Se tudo estiver certo, continue com o deploy, caso contrário, corrija e reinicie:
-
-    sudo systemctl restart curso_django.service
-    sudo systemctl restart curso_django.socket
-    sudo systemctl restart curso_django
-
-    sudo systemctl daemon-reload
-
-Caso tenha dificuldade em encontrar o problema, use:
-
-    sudo journalctl -u curso_django.service
-    sudo journalctl -u curso_django.socket
+    Requires=___GUNICORN_FILE_NAME___.socket 
+    ...
 
 ## Configurando o DNS
 
@@ -239,6 +195,13 @@ Depois, use os seguintes comandos:
     sudo chmod -R 755 __PROJECT_FOLDER__
     sudo nano /etc/nginx/sites-available/____REPLACE_ME_WITH_YOUR_OWN_DOMAIN____
 
-Adicione o conteúdo modificado do modelo do nginx.txt no arquivo atual. E então continue:
+Adicione o conteúdo modificado do modelo do nginx.txt no arquivo atual. 
+
+    # HTTP
+    server {
+    listen 80;
+    ...
+
+E então continue:
 
     sudo ln -s /etc/nginx/sites-available/____REPLACE_ME_WITH_YOUR_OWN_DOMAIN____ /etc/nginx/sites-enabled/____REPLACE_ME_WITH_YOUR_OWN_DOMAIN____
