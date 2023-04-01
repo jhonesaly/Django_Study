@@ -1,5 +1,27 @@
 # Deploy na AWS
 
+## Criando instância EC2
+
+Passo 1: Acesse o Console de Gerenciamento da AWS em https://console.aws.amazon.com/ e faça login na sua conta da AWS.
+
+Passo 2: No painel de navegação do Console da AWS, selecione o serviço EC2. Você será direcionado para o console do EC2.
+
+Passo 3: Clique no botão "Launch Instance" (Iniciar Instância) para começar a configurar sua instância EC2.
+
+Passo 4: Escolha a AMI (Amazon Machine Image) que deseja usar para sua instância EC2. A AMI é essencialmente uma imagem do sistema operacional que você deseja executar na sua instância EC2. Você pode escolher uma AMI fornecida pela AWS ou usar uma AMI personalizada.
+
+Passo 5: Escolha o tipo de instância que deseja usar para sua instância EC2. O tipo de instância é determinado pela quantidade de recursos de CPU, memória, armazenamento e rede que você precisa para sua carga de trabalho.
+
+Passo 6: Configure as opções de rede para sua instância EC2, incluindo a VPC (Virtual Private Cloud), as sub-redes e as regras de segurança de entrada e saída.
+
+Passo 7: Escolha o tamanho e o tipo de armazenamento para sua instância EC2. Você pode escolher entre armazenamento de instância, armazenamento em bloco (EBS) e armazenamento S3.
+
+Passo 8: Configure as opções de inicialização para sua instância EC2, incluindo ações de inicialização, como scripts e comandos de shell que serão executados quando a instância for iniciada.
+
+Passo 9: Revise todas as configurações para garantir que estejam corretas e, em seguida, clique em "Launch" (Iniciar) para iniciar sua instância EC2.
+
+Passo 10: Depois que sua instância EC2 for iniciada, você poderá se conectar a ela usando um cliente SSH. Para isso, selecione sua instância EC2 no console do EC2, clique no botão "Connect" (Conectar) e siga as instruções para se conectar à sua instância.
+
 ## Instalando MySQL no servidor
 
 Comandos no server:
