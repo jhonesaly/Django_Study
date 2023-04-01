@@ -129,3 +129,83 @@ Se a installação do psycopg2 não der certo, instale esse pacote antes e repit
     nano .env
 
 Coloque as configurações corretas no arquivo
+
+## Configurando gunicorn
+
+Utilizando o modelo gunicorn.txt, substitua todos os dunder names no cabeçalho usando 'ctrl+f'.
+
+    # ___GUNICORN_FILE_NAME___ to the name of the gunicorn file you want
+    # __YOUR_USER__ to your user name
+    # __PROJECT_FOLDER__ to the folder name of your project
+    # __WSGI_FOLDER__ to the folder name where you find a file called wsgi.py
+
+Depois, execute os comandos (considerando os nomes trocados):
+
+    sudo nano /etc/systemd/system/curso_django.socket
+
+Adicione no arquivo:
+
+    [Unit]
+    Description=gunicorn blog socket
+
+    [Socket]
+    ListenStream=/run/curso_django.socket
+
+    [Install]
+    WantedBy=sockets.target
+
+Use ctrl + o, enter e ctrl + x para sair e continue:
+
+    sudo nano /etc/systemd/system/curso_django.service
+
+Adicione no arquivo:
+
+    [Unit]
+    Description=Gunicorn daemon (You can change if you want)
+    Requires=curso_django.socket
+    After=network.target
+
+    [Service]
+    User=ubuntu
+    Group=www-data
+    Restart=on-failure
+    EnvironmentFile=/home/ubuntu/app_repo/.env
+    WorkingDirectory=/home/ubuntu/app_repo
+    # --error-logfile --enable-stdio-inheritance --log-level and --capture-output
+    # are all for debugging purposes.
+    ExecStart=/home/ubuntu/app_repo/venv/bin/gunicorn \
+            --error-logfile /home/ubuntu/app_repo/gunicorn-error-log \
+            --enable-stdio-inheritance \
+            --log-level "debug" \
+            --capture-output \
+            --access-logfile - \
+            --workers 6 \
+            --bind unix:/run/curso_django.socket \
+            project.wsgi:application
+
+    [Install]
+    WantedBy=multi-user.target
+
+Use ctrl + o, enter e ctrl + x para sair e continue:
+
+    sudo systemctl start curso_django.socket
+    sudo systemctl enable curso_django.socket
+
+    sudo systemctl status curso_django.socket
+    sudo systemctl status curso_django.service
+
+    curl --unix-socket /run/curso_django.socket localhost
+    sudo systemctl status curso_django
+
+Se tudo estiver certo, continue com o deploy, caso contrário, corrija e reinicie:
+
+    sudo systemctl restart curso_django.service
+    sudo systemctl restart curso_django.socket
+    sudo systemctl restart curso_django
+
+    sudo systemctl daemon-reload
+
+Caso tenha dificuldade em encontrar o problema, use:
+
+    sudo journalctl -u curso_django.service
+    sudo journalctl -u curso_django.socket
