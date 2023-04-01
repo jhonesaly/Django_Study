@@ -213,3 +213,32 @@ Caso tenha dificuldade em encontrar o problema, use:
 ## Configurando o DNS
 
 Caso tenha um domínio próprio, é preciso configurá-lo para apontar para o IP público da AWS. Para tal, vá no painel de controle do domínio e busque por "alterar zona de DNS". Então adicione uma entrada do tipo A com destino para o IP público da instância EC2.
+
+## Configurando NGINX
+
+Utilizando o modelo nginx.txt, substitua todos os dunder names no cabeçalho usando 'ctrl+f'.
+
+    # ____REPLACE_ME_WITH_YOUR_OWN_DOMAIN____ = Replace with your domain
+    # __PROJECT_FOLDER__ = Replace with the path to the folder for the project
+    # __STATIC_FOLDER_PATH__ = Replace with the path to the folder for static files
+    # __MEDIA_FOLDER_PATH__ = Replace with the path to the folder for media files
+    # __SOCKET_NAME__ = Replace with your unix socket name
+
+Antes de configurar, configure a timezone para o local adequado:
+
+    sudo timedatectl set-timezone America/Sao_Paulo
+    sudo reboot
+
+Depois, use os seguintes comandos:
+
+    sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y
+    sudo apt install nginx certbot python3-certbot-nginx -y
+    sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
+    sudo systemctl stop nginx
+    sudo certbot certonly --standalone -d ____REPLACE_ME_WITH_YOUR_OWN_DOMAIN____
+    sudo chmod -R 755 __PROJECT_FOLDER__
+    sudo nano /etc/nginx/sites-available/____REPLACE_ME_WITH_YOUR_OWN_DOMAIN____
+
+Adicione o conteúdo modificado do modelo do nginx.txt no arquivo atual. E então continue:
+
+    sudo ln -s /etc/nginx/sites-available/____REPLACE_ME_WITH_YOUR_OWN_DOMAIN____ /etc/nginx/sites-enabled/____REPLACE_ME_WITH_YOUR_OWN_DOMAIN____
