@@ -209,3 +209,7 @@ Caso tenha dificuldade em encontrar o problema, use:
 
     sudo journalctl -u curso_django.service
     sudo journalctl -u curso_django.socket
+
+## Configurando o DNS
+
+Caso tenha um domínio próprio, é preciso configurá-lo para apontar para o IP público da AWS. Para tal, vá no painel de controle do domínio e busque por "alterar zona de DNS". Então adicione uma entrada do tipo A com destino para o IP público da instância EC2.
