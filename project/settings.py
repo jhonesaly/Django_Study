@@ -130,8 +130,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'base_static',
-    BASE_DIR / 'authors/templates',
-    BASE_DIR / 'recipes/templates',
 
 ]
 STATIC_ROOT = BASE_DIR / 'static'
