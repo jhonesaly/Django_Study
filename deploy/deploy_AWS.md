@@ -205,3 +205,5 @@ Adicione o conteúdo modificado do modelo do nginx.txt no arquivo atual.
 E então continue:
 
     sudo ln -s /etc/nginx/sites-available/____REPLACE_ME_WITH_YOUR_OWN_DOMAIN____ /etc/nginx/sites-enabled/____REPLACE_ME_WITH_YOUR_OWN_DOMAIN____
+
+Por fim, modifique o arquivo /etc/nginx/nginx.conf e troque o 'user www-data;' por 'user root;'. Isso impedirá problemas de acesso que impedem o nginx de carregar os arquivos css
