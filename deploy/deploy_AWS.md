@@ -100,6 +100,11 @@ Comandos no server:
     cd app_repo
     git pull origin <branch> (master ou main)
 
+Caso haja algum conflito com o servidor, utilize nele os comandos para sobrescrever:
+
+    git reset --hard HEAD
+    git pull origin <branch> (master ou main)
+
 ## Criando ambiente virtual e instalando pacotes
 
 Comandos no server (na pasta app_repo):
